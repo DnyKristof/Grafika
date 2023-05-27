@@ -1,0 +1,6 @@
+{
+    "C_Cpp.default.compilerPath": "d:\\Grafika\\c_sdk_220203\\MinGW\\bin\\gcc.exe",
+    "files.associations": {
+        "utils.h": "c"
+    }
+}
