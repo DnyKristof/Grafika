@@ -5,18 +5,28 @@
 #include "texture.h"
 #include "oszlop.h"
 #include "madarka.h"
+#include "floor.h"
 #include <obj/model.h>
 
 typedef struct Scene
 {
     Madarka madarka;
-    Model floor;
-    GLuint floor_tex;
+    Floor floor;
+    Material material;
     //Oszlop oszlop;
     double current_time;
+    GLfloat fogposition;
     double last_time;
     bool lock_camera;
     Oszlop oszlop[18];
+    bool help;
+    GLuint helptex;
+
+    bool running;
+    GLuint gameover;
+
+    bool invincible;
+
 } Scene;
 
 /**
@@ -27,7 +37,7 @@ void init_scene(Scene* scene);
 /**
  * Set the lighting of the scene.
  */
-void set_lighting();
+void set_lighting(float x,float y,float z);
 
 /**
  * Set the current material.
@@ -56,6 +66,8 @@ void madarka_kirajzol(const Scene* scene);
 void oszlopka_kirajzol(const Scene* scene,float xpos,float yscale);
 
 float *get_camera_position(const Scene *scene);
+
+
 
 
 
