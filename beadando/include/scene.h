@@ -27,6 +27,8 @@ typedef struct Scene
 
     bool invincible;
 
+    float lights;
+
 } Scene;
 
 /**
@@ -37,7 +39,7 @@ void init_scene(Scene* scene);
 /**
  * Set the lighting of the scene.
  */
-void set_lighting(float x,float y,float z);
+void set_lighting(Scene *scene,float x,float y,float z);
 
 /**
  * Set the current material.

@@ -148,6 +148,12 @@ void handle_app_events(App *app)
         case SDL_KEYUP:
             switch (event.key.keysym.scancode)
             {
+            case SDL_SCANCODE_Q:
+            app->scene.lights+=0.1;
+                break;
+                case SDL_SCANCODE_E:
+            app->scene.lights-=0.1;
+                break;
             case SDL_SCANCODE_W:
                 if (app->scene.lock_camera && app->scene.madarka.speed.x > -0.6)
                 {

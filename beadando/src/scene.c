@@ -47,11 +47,12 @@ void init_scene(Scene *scene)
 
     scene->material.shininess = 0.0;
 
+    scene->lights = 1;
     scene->invincible = 0;
     scene->fogposition = 14;
     scene->lock_camera = 1;
     scene->madarka.pos.x = 0.0;
-    scene->madarka.pos.y = -10.0;
+    scene->madarka.pos.y = -5.0;
     scene->madarka.pos.z = 5;
     scene->madarka.speed.x = 0.0;
     scene->madarka.speed.z = 0.0;
@@ -59,11 +60,11 @@ void init_scene(Scene *scene)
     scene->madarka.accelaration.z = 1.0;
 }
 
-void set_lighting(float x, float y, float z)
+void set_lighting(Scene *scene,float x, float y, float z)
 {
-    float ambient_light[] = {4.0f, 4.0f, 4.0f, 4.0f};
-    float diffuse_light[] = {1.0f, 1.0f, 1.0, 1.0f};
-    float specular_light[] = {1.0f, 1.0f, 1.0f, 1.0f};
+    float ambient_light[] = {scene->lights, scene->lights, scene->lights, scene->lights};
+    float diffuse_light[] = {scene->lights, scene->lights,scene->lights, scene->lights};
+    float specular_light[] = {scene->lights, scene->lights, scene->lights, scene->lights};
     float position[] = {x, y + 5, z + 5, 1.0f};
 
     glLightfv(GL_LIGHT0, GL_AMBIENT, ambient_light);
@@ -101,7 +102,7 @@ void update_scene(Scene *scene)
     
     if (scene->running)
     {
-        set_lighting(scene->madarka.pos.x, scene->madarka.pos.y, scene->madarka.pos.z);
+        set_lighting(scene,scene->madarka.pos.x, scene->madarka.pos.y, scene->madarka.pos.z);
         fogthings(scene);
         scene->current_time = (double)SDL_GetTicks() / 1000;
 
