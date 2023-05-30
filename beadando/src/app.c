@@ -123,20 +123,20 @@ void handle_app_events(App *app)
                 app->is_running = false;
                 break;
             case SDL_SCANCODE_W:
-                if(!app->scene.lock_camera)
-                set_camera_speed(&(app->camera), 7);
+                if (!app->scene.lock_camera)
+                    set_camera_speed(&(app->camera), 7);
                 break;
             case SDL_SCANCODE_S:
-            if(!app->scene.lock_camera)
-                set_camera_speed(&(app->camera), -7);
+                if (!app->scene.lock_camera)
+                    set_camera_speed(&(app->camera), -7);
                 break;
             case SDL_SCANCODE_A:
-            if(!app->scene.lock_camera)
-                set_camera_side_speed(&(app->camera), 7);
+                if (!app->scene.lock_camera)
+                    set_camera_side_speed(&(app->camera), 7);
                 break;
             case SDL_SCANCODE_D:
-            if(!app->scene.lock_camera)
-                set_camera_side_speed(&(app->camera), -7);
+                if (!app->scene.lock_camera)
+                    set_camera_side_speed(&(app->camera), -7);
                 break;
             case SDL_SCANCODE_F1:
                 app->scene.help = 1;
@@ -149,10 +149,10 @@ void handle_app_events(App *app)
             switch (event.key.keysym.scancode)
             {
             case SDL_SCANCODE_Q:
-            app->scene.lights+=0.1;
+                app->scene.lights += 0.1;
                 break;
-                case SDL_SCANCODE_E:
-            app->scene.lights-=0.1;
+            case SDL_SCANCODE_E:
+                app->scene.lights -= 0.1;
                 break;
             case SDL_SCANCODE_W:
                 if (app->scene.lock_camera && app->scene.madarka.speed.x > -0.6)
@@ -198,6 +198,19 @@ void handle_app_events(App *app)
                 }
 
                 break;
+            case SDL_SCANCODE_V:
+                if (app->scene.visszae == 1)
+                {
+                    app->scene.visszae = 0;
+                    app->scene.madarka.speed.y*=-1;
+                }
+                else
+                {
+                    app->scene.visszae = 1;
+                    app->scene.madarka.speed.y*=-1;
+                }
+
+                break;
             case SDL_SCANCODE_1:
                 if (app->scene.lock_camera)
                 {
@@ -236,6 +249,7 @@ void handle_app_events(App *app)
                 break;
             }
             break;
+
         case SDL_MOUSEBUTTONDOWN:
             is_mouse_down = true;
             break;

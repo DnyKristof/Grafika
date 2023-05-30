@@ -56,8 +56,9 @@ void init_scene(Scene *scene)
     scene->madarka.pos.z = 5;
     scene->madarka.speed.x = 0.0;
     scene->madarka.speed.z = 0.0;
-    scene->madarka.speed.y = 0.1;
+    scene->madarka.speed.y = 1;
     scene->madarka.accelaration.z = 1.0;
+    scene->visszae=0;
 }
 
 void set_lighting(Scene *scene,float x, float y, float z)
@@ -107,19 +108,28 @@ void update_scene(Scene *scene)
         scene->current_time = (double)SDL_GetTicks() / 1000;
 
         double time = (scene->current_time - scene->last_time);
-        scene->madarka.pos.y += 0.1; // time*scene->madarka.speed.y;
+        scene->madarka.pos.y += 0.1 * scene->madarka.speed.y;
         scene->madarka.pos.x += time * scene->madarka.speed.x;
         scene->madarka.pos.z += time * scene->madarka.speed.z;
 
-        /*if(scene->madarka.pos.x > 0.7 || scene->madarka.pos.x < -0.7 || (scene->madarka.pos.x < 0.03 && scene->madarka.pos.x > -0.03)){
-            scene->madarka.speed.x = 0;
-        }*/
+        
+        
         regulate_madarka_sidespeed(scene);
 
         if (scene->madarka.speed.z > -5)
         {
             scene->madarka.speed.z -= 0.25;
         }
+
+        printf("%d\n",scene->visszae);
+
+        if(!scene->visszae){
+            scene->madarka.speed.y+=0.001;
+        }else{
+            
+            scene->madarka.speed.y-=0.01;
+        }
+        
         scene->last_time = scene->current_time;
 
         if (!scene->invincible)
@@ -145,7 +155,6 @@ void render_scene(Scene *scene)
 
     if (scene->help)
     {
-        glDisable(GL_LIGHTING);
         help(scene->helptex);
     }
 
@@ -185,6 +194,7 @@ float *get_camera_position(const Scene *scene)
 
 void help(GLuint texture)
 {
+    glDisable(GL_LIGHTING);
     glDisable(GL_FOG);
     glDisable(GL_DEPTH_TEST);
 
@@ -206,4 +216,5 @@ void help(GLuint texture)
     glEnd();
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_FOG);
+    glEnable(GL_LIGHTING);
 }

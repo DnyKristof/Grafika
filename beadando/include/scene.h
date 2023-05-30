@@ -29,6 +29,8 @@ typedef struct Scene
 
     float lights;
 
+    bool visszae;
+
 } Scene;
 
 /**

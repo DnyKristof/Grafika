@@ -9,6 +9,7 @@ void madarka_kirajzol(const Scene *scene)
     glScalef(0.05, 0.05, 0.05);
     glRotatef(-90, 0, 0, 1);
     glRotatef((scene->madarka.speed.z) * 90 / 8 + 10, 0, 1, 0);
+    glRotatef(-(scene->madarka.speed.x) * 90 / 8 , 1, 0, 0);
     glBindTexture(GL_TEXTURE_2D, scene->madarka.texture);
     draw_model(&(scene->madarka.model));
     glPopMatrix();
